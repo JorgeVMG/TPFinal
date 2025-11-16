@@ -26,6 +26,7 @@ spl_autoload_register(function($class_name) {
         ROOT_PATH . 'modelo/',
         ROOT_PATH . 'modelo/conexion/',
         ROOT_PATH . 'modelo/clases/',
+        ROOT_PATH . 'control/',
     ];
 
     foreach ($dirs as $dir) {
