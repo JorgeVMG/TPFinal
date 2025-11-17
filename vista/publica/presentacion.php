@@ -3,6 +3,6 @@
         <h1 class="text-center">
             Bienvenidos a la Tienda de Ropa Online
         </h1>
-        <a href="?page=admin_usuario" class="btn btn-primary">ir a login</a>
+        <a href="?page=login" class="btn btn-primary">ir a login</a>
     </div>
 </div>

@@ -1,29 +1,24 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/modificacion.js"></script>
+    <script src="../js/validaciones.js"></script>
     <script>
-        $(document).ready(function(){
+        (() => {
+            'use strict'
 
-            $.ajax({
-                url: "control/usuarioAMB.php",
-                type: "GET",
-                dataType: "json",
-                success: function(data){
-                    let filas = "";
-
-                    data.forEach(function(usuario){
-                        filas += `
-                            <tr>
-                                <td>${usuario.id}</td>
-                                <td>${usuario.nombre}</td>
-                                <td>${usuario.email}</td>
-                            </tr>
-                        `;
-                    });
-
-                    $("#tablaUsuarios tbody").html(filas);
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
                 }
-            });
 
-        });
+                form.classList.add('was-validated')
+                }, false)
+            })
+        })()
     </script>
 </body>
 </html>

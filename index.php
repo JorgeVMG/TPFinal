@@ -10,7 +10,8 @@ if ($page === null) {
 $rutas = [
     "presentacion" => "vista/publica/presentacion.php",
     "login"=> "vista/publica/login.php",
-    "admin_usuario"=> "vista/privada/administradorUsuarios.php"
+    "admin_usuario"=> "vista/privada/administradorUsuarios.php",
+    "crear"=> "vista/publica/crearUsuario.php",
 ];
 
 $url = $rutas[$page] ?? $rutas["presentacion"];

@@ -103,7 +103,7 @@ class usuario{
             $usuario = new usuario();
             $usuario->setId($fila['idusuario']);
             $usuario->setNombre($fila['usnombre']);
-            $usuario->setEmail($fila['usemail']);
+            $usuario->setEmail($fila['usmail']);
             $usuario->setPassword($fila['uspass']);
             $listaUsuarios[] = $usuario;
         }
