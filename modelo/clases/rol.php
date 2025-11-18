@@ -54,18 +54,24 @@ class rol{
         while($fila = $resultado->fetch(PDO::FETCH_ASSOC)){
             $rol = new Rol();
             $rol->setId($fila['idrol']);
-            $rol->setDescripcion($fila['rodescripcion']);
+            $rol->setNombre($fila['rodescripcion']);
             $lista[] = $rol;
         }
 
         return $lista;
     }
 
-    public function buscar($id){
+    public function buscarRol($id){
         $this->setId($id);
-        $sql = "SELECT * FROM rol WHERE idrol = ".$this->getId();
-        $bd= new BaseDatos();
-        $retorno = $bd->exec($sql);
+        $sql = "SELECT * FROM rol WHERE idrol = ".$id;
+        $bd = new BaseDatos();
+        $resultado = $bd->query($sql);
+        if($fila = $resultado->fetch(PDO::FETCH_ASSOC)){
+            $rol = new rol();
+            $rol->setId($fila['idrol']);
+            $rol->setNombre($fila['rodescripcion']);
+            $retorno = $rol;
+        }
         return $retorno;
     }
 }

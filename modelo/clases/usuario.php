@@ -62,12 +62,11 @@ class usuario{
         $retorno = $baseDatos->exec($sql);
         return $retorno;
     }
-    public function modificar($id,$nombre,$email,$password){
+    public function modificar($id,$nombre,$email){
         $this->setId($id);
         $this->setNombre($nombre);
         $this->setEmail($email);
-        $this->setPassword($password);
-        $sql = "UPDATE usuario SET usnombre = '".$this->getNombre()."', usemail = '".$this->getEmail()."', uspass = '".$this->getPassword()."' WHERE idusuario = ".$this->getId();
+        $sql = "UPDATE usuario SET usnombre = '".$this->getNombre()."', usemail = '".$this->getEmail()."' WHERE idusuario = ".$this->getId();
         $baseDatos = new BaseDatos();
         $retorno = $baseDatos->exec($sql);
         return $retorno;
@@ -105,6 +104,7 @@ class usuario{
             $usuario->setNombre($fila['usnombre']);
             $usuario->setEmail($fila['usmail']);
             $usuario->setPassword($fila['uspass']);
+            $usuario->setusdeshabilitado($fila['usdeshabilitado']);
             $listaUsuarios[] = $usuario;
         }
         return $listaUsuarios;
@@ -112,6 +112,13 @@ class usuario{
     public function desactivar($id){
         $this->setId($id);
         $sql = "UPDATE usuario SET usdeshabilitado = NOW() WHERE idusuario = ".$this->getId();
+        $baseDatos = new BaseDatos();
+        $retorno = $baseDatos->exec($sql);
+        return $retorno;
+    }
+    public function activar($id){
+        $this->setId($id);
+        $sql = "UPDATE usuario SET usdeshabilitado = NULL WHERE idusuario = ".$this->getId();
         $baseDatos = new BaseDatos();
         $retorno = $baseDatos->exec($sql);
         return $retorno;

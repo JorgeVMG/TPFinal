@@ -1,24 +1,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/modificacion.js"></script>
-    <script src="../js/validaciones.js"></script>
-    <script>
-        (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="vista/js/ajax.js"></script>
+    <script src="vista/js/validaciones.js"></script>
 </body>
 </html>
