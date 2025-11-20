@@ -2,7 +2,14 @@
 class usuarioAMB{
     public function crearUsuario($usuario, $email, $contrasena){
         $us = new usuario();
-        $retorno = $us->ingresar($usuario, $email, $contrasena);
+        $ejecucion = $us->ingresar($usuario, $email, $contrasena);
+        $retorno = false;
+        if($ejecucion){
+            $idusuario = $ejecucion["idusuario"];
+            $usrol = new usuarioRolAMB();
+            $rol = $usrol->asignarRol($idusuario, 2); //rol por defecto
+            $retorno = true;
+        }
         return $retorno;
     }
     public function modificarUsuario($id, $usuario, $email, $rol){
@@ -47,6 +54,18 @@ class usuarioAMB{
         $us = new usuario();
         $usuario = $us->buscarPorId($id);
         return $usuario;
+    }
+    public function usuarioValido($nombreUsuario, $contrasena){
+        $us = new usuario();
+        $retorno = $us->validarUsuario($nombreUsuario, $contrasena);
+        if($retorno["valid"]){
+            $usrol = new usuarioRolAMB();
+            $idrol = $usrol->obtenerRolPorUsuario($retorno["idusuario"]);
+            $rolAMB = new rolAMB();
+            $rol = $rolAMB->obtenerRol($idrol);
+            $retorno["rol"] = $rol->getNombre();
+        }
+        return $retorno;
     }
     public function deshabilitarUsuario($id){
         $us = new usuario();

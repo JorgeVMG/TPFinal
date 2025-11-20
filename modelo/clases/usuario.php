@@ -54,12 +54,21 @@ class usuario{
         $this->usdeshabilitado = $usdeshabilitado;
     }
     public function ingresar($nombre,$email,$password){
+        $passwordsecure = password_hash($password, PASSWORD_DEFAULT);
         $this->setNombre($nombre);
         $this->setEmail($email);
-        $this->setPassword($password);
-        $sql = "INSERT INTO usuario (usnombre, usemail, uspass) VALUES ('".$this->getNombre()."','".$this->getEmail()."','".$this->getPassword()."')";
+        $this->setPassword($passwordsecure);
+        $sql = "INSERT INTO usuario (usnombre, usmail, uspass) VALUES ('".$this->getNombre()."','".$this->getEmail()."','".$this->getPassword()."')";
         $baseDatos = new BaseDatos();
-        $retorno = $baseDatos->exec($sql);
+        $ejecucion = $baseDatos->query($sql);
+        if($ejecucion){
+            $result = $baseDatos->query("SELECT LAST_INSERT_ID()");
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $id = $row['LAST_INSERT_ID()'];
+            $retorno = ["success" => true, "idusuario" => $id ];
+        }else{
+            $retorno = ["success" => false];
+        }
         return $retorno;
     }
     public function modificar($id,$nombre,$email){
@@ -123,4 +132,16 @@ class usuario{
         $retorno = $baseDatos->exec($sql);
         return $retorno;
     }
+    public function validarUsuario($nombreUsuario, $contrasena){
+        $sql = "SELECT * FROM usuario WHERE usnombre = '".$nombreUsuario."' AND usdeshabilitado IS NULL";
+        $baseDatos = new BaseDatos();
+        $resultado = $baseDatos->query($sql);
+        $fila = $resultado->fetch(PDO::FETCH_ASSOC);
+        if($fila && password_verify($contrasena, $fila['uspass'])){
+            $retorno = ["valid" => true, "idusuario" => $fila['idusuario'], "usnombre" => $fila['usnombre']];
+        }else{
+            $retorno = ["valid" => false, "mesaje" => $fila];        
+        }
+        return $retorno;
+    } 
 }
