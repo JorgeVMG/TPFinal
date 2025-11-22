@@ -1,3 +1,8 @@
+<?php 
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+    header("Location: ../../index.php");
+    exit();
+}?>
 <style>
     body {
         background-image: url("vista/imagenes/fondo.jpg");
@@ -24,8 +29,9 @@
                 <a href="?page=crear">Crear un nuevo usuario</a>
             </div>
             <div class="d-grid gap-2">
-                <input type="submit" class="btn btn-primary mt-3" value="ingresar">
+                <input type="submit" class="btn btn-info mt-3" value="ingresar">
             </div>
         </form>
     </div>
 </div>
+<script src="vista/js/loginSesionAjax.js"></script>

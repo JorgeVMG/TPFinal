@@ -11,6 +11,7 @@ $rutas = [
     "presentacion" => "vista/publica/presentacion.php",
     "login"=> "vista/publica/login.php",
     "admin_usuario"=> "vista/privada/administradorUsuarios.php",
+    "admin_producto"=> "vista/privada/adminProductos.php",
     "crear"=> "vista/publica/crearUsuario.php",
 ];
 

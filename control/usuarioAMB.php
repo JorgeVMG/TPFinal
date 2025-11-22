@@ -55,16 +55,19 @@ class usuarioAMB{
         $usuario = $us->buscarPorId($id);
         return $usuario;
     }
-    public function usuarioValido($nombreUsuario, $contrasena){
+    public function validarCredenciales($nombreUsuario, $contrasena){
         $us = new usuario();
-        $retorno = $us->validarUsuario($nombreUsuario, $contrasena);
-        if($retorno["valid"]){
-            $usrol = new usuarioRolAMB();
-            $idrol = $usrol->obtenerRolPorUsuario($retorno["idusuario"]);
-            $rolAMB = new rolAMB();
+        $usrol = new usuarioRolAMB();
+        $rolAMB = new rolAMB();
+        $sesion = new sesion();
+        $ejecucion = $us->validarUsuario($nombreUsuario, $contrasena);
+        if($ejecucion["valid"]){
+            $idrol = $usrol->obtenerRolPorUsuario($ejecucion["idusuario"]);
             $rol = $rolAMB->obtenerRol($idrol);
-            $retorno["rol"] = $rol->getNombre();
+            $sesion::set("rol",$rol->getNombre());
+            $sesion::set("usuario",$ejecucion["usnombre"]);
         }
+        $retorno = $ejecucion["valid"];
         return $retorno;
     }
     public function deshabilitarUsuario($id){

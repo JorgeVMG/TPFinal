@@ -64,3 +64,4 @@
         </div>
     </div>
 </div>
+<script src="vista/js/listaUsuariosAjax.js"></script>

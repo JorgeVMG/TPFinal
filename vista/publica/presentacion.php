@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <h1 class="text-center">
-            Bienvenidos a la Tienda de Ropa Online
+            Bienvenidos a la Tienda de objetos
         </h1>
-        <a href="?page=login" class="btn btn-primary">ir a login</a>
+        
     </div>
 </div>

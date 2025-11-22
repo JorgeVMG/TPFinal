@@ -47,4 +47,11 @@ class menuRol{
         $retorno = $bd->exec($sql);
         return $retorno;
     }
+    public function obteridrol($idmenu){
+        $this->setIdMenu($idMenu);
+        $sql = "SELECT idrol FROM menurol WHERE idmenu = ".$this->getIdMenu();
+        $bd= new BaseDatos();
+        $retorno = $bd->query($sql);
+        return $retorno;
+    }
 }
