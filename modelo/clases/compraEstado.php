@@ -43,12 +43,11 @@ class compraEstado{
     public function setCefechafin($cefechafin){
         $this->cefechafin = $cefechafin;
     }
-    public function ingresar($idcompra,$idcompraestadotipo,$cefechaini,$cefechafin){
+    public function ingresoCompEstado($idcompra,$idcompraestadotipo,$cefechaini){
         $this->setIdcompra($idcompra);
         $this->setIdcompraestadotipo($idcompraestadotipo);
         $this->setCefechaini($cefechaini);
-        $this->setCefechafin($cefechafin);
-        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechaini, cefechafin) VALUES (".$this->getIdcompra().",".$this->getIdcompraestadotipo().",'".$this->getCefechaini()."','".$this->getCefechafin()."')";
+        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechaini) VALUES (".$this->getIdcompra().",".$this->getIdcompraestadotipo().",'".$this->getCefechaini()."')";
         $bd= new BaseDatos();
         $retorno = $bd->exec($sql);
         return $retorno;
@@ -89,5 +88,6 @@ class compraEstado{
 
         return $lista;
     }
+    
 
 }

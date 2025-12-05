@@ -4,6 +4,7 @@ include ('../../configuracion.php');
 $accion = $_REQUEST['accion'] ?? '';
 $us = new usuarioAMB();
 $pro = new productoAMB();
+$men = new menuAMB();
 switch ($accion){
     case "listarUsuario":
         $retorno = $us->listarUsuarios();
@@ -34,6 +35,12 @@ switch ($accion){
         break;
     case "cambioEstado":
         $retorno = $pro->estadoCambio($_POST["idproducto"]);
+        break;
+    case "ingresarProducto":
+        $retorno = $pro->agregarCarrito($_POST["productoid"],$_POST["cant"]);
+        break;
+    case "listarMenu":
+        $retorno = $men->listarMenus();
         break;
 }
 echo json_encode($retorno);

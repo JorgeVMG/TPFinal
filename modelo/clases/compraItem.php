@@ -35,13 +35,13 @@ class compraItem{
     public function setCicantidad($cicantidad){
         $this->cicantidad = $cicantidad;
     }
-    public function ingresar($idproducto,$idcompra,$cicantidad){
+    public function ingresarCompItem($idproducto,$idcompra,$cicantidad){
         $this->setIdproducto($idproducto);
         $this->setIdcompra($idcompra);
         $this->setCicantidad($cicantidad);
-        $sql = "INSERT INTO compraitem (idproducto, idcompra, cicantidad) VALUES (".$this->getIdproducto().",".$this->getIdcompra().",".$this->getCicantidad().")";
+        $sql = "INSERT INTO compraitmem (idproducto, idcompra, cicantidad) VALUES (".$this->getIdproducto().",".$this->getIdcompra().",".$this->getCicantidad().")";
         $bd= new BaseDatos();
-        $retorno = $bd->exec($sql);
+        $retorno = $bd->prepare($sql);
         return $retorno;
     }
     public function eliminar($idcompraItem){

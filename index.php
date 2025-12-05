@@ -1,6 +1,6 @@
 <?php
 include_once('configuracion.php');
-session_start();
+sesion::start();
 
 $page = $_GET['page'] ?? null;
 $submit = $_GET['submit'] ?? null;
@@ -13,6 +13,8 @@ $rutas = [
     "admin_usuario"=> "vista/privada/administradorUsuarios.php",
     "admin_producto"=> "vista/privada/adminProductos.php",
     "crear"=> "vista/publica/crearUsuario.php",
+    "carrito"=> "vista/publica/carritoCompra.php",
+    "admin_menu"=> "vista/privada/adminmenu.php"
 ];
 
 $url = $rutas[$page] ?? $rutas["presentacion"];

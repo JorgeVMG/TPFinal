@@ -58,7 +58,7 @@ class compraEstadoTipo{
         $lista = [];
 
         while($fila = $resultado->fetch(PDO::FETCH_ASSOC)){
-            $cet = new CompraEstadoTipo();
+            $cet = new compraEstadoTipo();
             $cet->setId($fila['idcompraestadotipo']);
             $cet->setDescripcion($fila['cedescripcion']);
             $cet->setDetalle($fila['cetdetalle']);
@@ -66,6 +66,19 @@ class compraEstadoTipo{
         }
 
         return $lista;
+    }
+    public function buscarTipo($idtipo){
+        $sql = "SELECT * FROM compraestadotipo WHERE idcompraestadotipo = $idtipo";
+        $bd = new BaseDatos();
+        $ejecucion = $bd->query($sql);
+        if($ejecucion->fetch(PDO::FETCH_ASSOC)){
+            $cet = new compraEstadoTipo();
+            $cet->setId($ejecucion['idcompraestadotipo']);
+            $cet->setDescripcion($ejecucion['cedescripcion']);
+            $cet->setDetalle($ejecucion['cetdetalle']);
+            $retorno = $cet;
+        }
+        return $retorno;
     }
 
 }

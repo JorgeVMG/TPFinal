@@ -1,5 +1,16 @@
+<?php
+$usuario = sesion::get("idusuario");
+$page = $_GET['page'] ?? null;
+if($page!= "presentacion" && $page != ""){
+    if (!$usuario && $page != "login" && $page != "crear") {
+        header("Location: index.php?page=login");
+        exit();
+    }   
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php
-    $page = $_GET['page'] ?? null;
+   
     if($page != "login" && $page != "crear"){
         require_once "vista/estructura/nav.php";
     }

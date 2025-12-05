@@ -7,7 +7,9 @@ class usuarioAMB{
         if($ejecucion){
             $idusuario = $ejecucion["idusuario"];
             $usrol = new usuarioRolAMB();
-            $rol = $usrol->asignarRol($idusuario, 2); //rol por defecto
+            $comp = new compraAMB;
+            $rol = $usrol->asignarRol($idusuario, 3); //rol por defecto
+            $comp->crearCarrito($idusuario);
             $retorno = true;
         }
         return $retorno;
@@ -64,6 +66,7 @@ class usuarioAMB{
         if($ejecucion["valid"]){
             $idrol = $usrol->obtenerRolPorUsuario($ejecucion["idusuario"]);
             $rol = $rolAMB->obtenerRol($idrol);
+            $sesion::set("idusuario",$ejecucion["idusuario"]);
             $sesion::set("rol",$rol->getNombre());
             $sesion::set("usuario",$ejecucion["usnombre"]);
         }

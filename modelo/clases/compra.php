@@ -28,14 +28,24 @@ class compra{
     public function setIdusuario($idusuario){
         $this->idusuario = $idusuario;
     }
-    public function ingresar($cofecha,$idusuario){
-        $this->setCofecha($cofecha);
+    public function crearCompra($idusuario) {
         $this->setIdusuario($idusuario);
-        $sql = "INSERT INTO compra (cofecha, idusuario) VALUES ('".$this->getCofecha()."',".$this->getIdusuario().")";
-        $bd= new BaseDatos();
-        $retorno = $bd->exec($sql);
-        return $retorno;
+        $sql = "INSERT INTO compra (idusuario) VALUES (".$this->getIdusuario().")";
+        
+        $bd = new BaseDatos();
+        
+        // Exec ejecuta INSERT y devuelve cantidad de filas afectadas
+        $filas = $bd->exec($sql);
+
+        if ($filas > 0) {
+            // Tomamos el ID creado
+            $id = $bd->lastInsertId();
+            return ["success" => true, "idcompra" => $id];
+        } else {
+            return ["success" => false];
+        }
     }
+
     public function eliminar($idcompra){
         $this->setIdcompra($idcompra);
         $sql = "DELETE FROM compra WHERE idcompra = ".$this->getIdcompra();
@@ -58,7 +68,7 @@ class compra{
         $resultado = $bd->query($sql);
         $lista = [];
 
-        while($fila = $resultado->fetch(PDO::FETCH_ASSOC)){
+        while($fila = $resultado){
             $compra = new Compra();
             $compra->setId($fila['idcompra']);
             $compra->setFecha($fila['cofecha']);
@@ -80,6 +90,12 @@ class compra{
         $this->setIdusuario($idusuario);
         $sql = "SELECT * FROM compra WHERE idusuario = ".$this->getIdusuario();
         $bd= new BaseDatos();
+        $retorno = $bd->exec($sql);
+        return $retorno;
+    }
+    public function buscarIdUsu($idus){
+        $sql = "SELECT idcompra FROM compra WHERE idusuario = $idus";
+        $bd = new BaseDatos();
         $retorno = $bd->exec($sql);
         return $retorno;
     }
